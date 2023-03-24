@@ -5,7 +5,7 @@
  * @n: integer to be printed
  */
 void print_number(int n)
-{
+
 	unsigned int n1;
 
 	if (n < 0)
