@@ -13,6 +13,8 @@ void print_opcodes(char *addr, int num_bytes)
 	for (i = 0; i < num_bytes; i++)
 	{
 		printf("%02x ", addr[i] & 0xff);
+		if (i < num_bytes - 1)
+			printf(" ");
 	}
 
 	printf("\n");
