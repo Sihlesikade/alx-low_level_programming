@@ -5,7 +5,10 @@
 /**
  * print_all - prints anything
  * @format: list of types of arguments passed to the function
+ * c: char, s: char * (if the string is NULL, print (nil) instead,
+ * i: integer, f: float and ignore all the other characters
  */
+
 void print_all(const char * const format, ...)
 {
 	int i = 0;
@@ -14,7 +17,6 @@ void print_all(const char * const format, ...)
 	va_list list;
 
 	va_start(list, format);
-
 	if (format)
 	{
 		while (format[i])
@@ -30,8 +32,9 @@ void print_all(const char * const format, ...)
 				case 'f':
 					printf("%s%f", sep, va_arg(list, double));
 					break;
-				case's':
+				case 's':
 					str = va_arg(list, char *);
+
 					if (!str)
 						str = "(nil)";
 					printf("%s%s", sep, str);
@@ -44,8 +47,6 @@ void print_all(const char * const format, ...)
 			i++;
 		}
 	}
-
 	printf("\n");
 	va_end(list);
 }
-
