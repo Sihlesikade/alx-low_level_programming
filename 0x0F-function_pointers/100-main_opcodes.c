@@ -2,35 +2,36 @@
 #include <stdlib.h>
 
 /**
- * print_opcodes - prints the opcodes of a function
- * @addr: pointer to the function
- * @num_bytes: number of bytes to print
+ * print_opcodes - Prints the opcodes of a given function.
+ * @addr: Address of the function.
+ * @bytes: Number of bytes to print.
+ *
+ * Return: void.
  */
-void print_opcodes(char *addr, int num_bytes)
+void print_opcodes(char *addr, int bytes)
 {
 	int i;
 
-	for (i = 0; i < num_bytes; i++)
+	for (i = 0; i < bytes; i++)
 	{
-		printf("%02x ", addr[i] & 0xff);
-		if (i < num_bytes - 1)
+		printf("%.2hhx", addr[i]);
+		if (i < bytes - 1)
 			printf(" ");
 	}
-
 	printf("\n");
 }
 
 /**
- * main - prints the opcodes of its own main  function
- * @argc: number of arguments
- * @argv: array of arguments
+ * main - Entry point.
+ * @argc: Number of command line arguments.
+ * @argv: Array of command line argument strings.
  *
- * Return:0 on success,1 on incorrect number of arguments,2 on negative number
- * of bytes
+ * Return: 0 on success, 1 on error, 2 on negative byte count.
  */
 int main(int argc, char **argv)
 {
 	int num_bytes;
+	char *addr = (char *)main;
 
 	if (argc != 2)
 	{
@@ -39,15 +40,16 @@ int main(int argc, char **argv)
 	}
 
 	num_bytes = atoi(argv[1]);
+
 	if (num_bytes < 0)
 	{
 		printf("Error\n");
 		return (2);
 	}
 
-	char *addr = (char *)&main;
-
 	print_opcodes(addr, num_bytes);
 
 	return (0);
 }
+
+
